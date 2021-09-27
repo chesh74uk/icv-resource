@@ -2,10 +2,10 @@
   <v-app>
     <v-app-bar
       dense
-      :clipped-left="clipped"
       fixed
-      app>
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+      app
+    >
+      <v-app-bar-nav-icon @click="drawer = true" />
     </v-app-bar>
 
     <v-navigation-drawer
@@ -17,15 +17,14 @@
         nav
         dense
       >
-        <v-list-item-group
-          v-model="group"
-        >
+        <v-list-item-group>
           <v-list-item
-          v-for="(item,i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact>
+            v-for="(item,i) in items"
+            :key="i"
+            :to="item.to"
+            router
+            exact
+          >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
@@ -37,7 +36,7 @@
 
     <v-main>
       <v-container>
-        <Nuxt/>
+        <Nuxt />
       </v-container>
     </v-main>
 
