@@ -36,6 +36,7 @@
                 <v-card-actions>
                   <v-btn
                     :href="item.link"
+                    target="_blank"
                     class="ml-2 mt-5"
                     outlined
                     rounded
