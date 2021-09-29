@@ -45,7 +45,7 @@
                         View
                       </v-btn>
                     </v-col>
-                    <v-col v-if="!isAdmin">
+                    <v-col v-if="isAdmin">
                       <v-btn
                         :href="resourceLink"
                         tile

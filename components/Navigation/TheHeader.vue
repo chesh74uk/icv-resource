@@ -14,7 +14,20 @@
         justify="space-around"
       >
         <v-btn
-          v-for="(item,i) in items"
+          v-for="(item,i) in userItems"
+          :key="i"
+          elevation="2"
+          :to="item.to"
+          router
+          exact
+        >
+          <v-icon left dark>
+            {{ item.icon }}
+          </v-icon>
+          {{ item.title }}
+        </v-btn>
+        <v-btn
+          v-for="(item,i) in adminItems"
           :key="i"
           elevation="2"
           :to="item.to"
@@ -40,7 +53,21 @@
       >
         <v-list-item-group>
           <v-list-item
-            v-for="(item,i) in items"
+            v-for="(item,i) in userItems"
+            :key="i"
+            :to="item.to"
+            router
+            exact
+          >
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+        <v-list-item-group>
+          <v-list-item
+            v-for="(item,i) in adminItems"
             :key="i"
             :to="item.to"
             router
@@ -63,22 +90,12 @@ export default {
   data () {
     return {
       drawer: false,
-      items: [
-        {
-          icon: 'mdi-tree',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-wan',
-          title: 'Resources',
-          to: '/resources'
-        },
-        {
-          icon: 'mdi-pen',
-          title: 'Admin',
-          to: '/admin'
-        }
+      userItems: [
+        { icon: 'mdi-tree', title: 'Welcome', to: '/' },
+        { icon: 'mdi-wan', title: 'Resources', to: '/resources' }
+      ],
+      adminItems: [
+        { icon: 'mdi-pen', title: 'Admin', to: '/admin' }
       ],
       miniVariant: false,
       right: true,
