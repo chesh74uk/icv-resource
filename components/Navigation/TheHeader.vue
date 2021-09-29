@@ -6,7 +6,7 @@
       app
     >
       <v-app-bar-nav-icon
-        class="hidden-sm-and-up"
+        class="hidden-xs-and-up"
         @click="drawer = true"
       />
       <v-row
