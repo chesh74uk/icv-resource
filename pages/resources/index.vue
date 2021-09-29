@@ -2,6 +2,7 @@
   <div>
     <ResourceCard
       id="1"
+      :is-admin="isAdmin"
       color="#1F7087"
       img="https://cdn.vuetifyjs.com/images/cards/foster.jpg"
       link="https://www.theguardian.com/uk-news/2021/jul/30/the-links-between-welsh-slate-and-slavery?CMP=Share_iOSApp_Other"
@@ -12,6 +13,7 @@
     />
     <ResourceCard
       id="2"
+      :is-admin="isAdmin"
       color="#1F7087"
       img="https://cdn.vuetifyjs.com/images/cards/foster.jpg"
       link="https://www.bbc.co.uk/sounds/play/p01w66tg"
@@ -28,7 +30,13 @@ import ResourceCard from '@/components/Resources/ResourceCard'
 
 export default {
   name: 'Index',
-  components: { ResourceCard }
+  components: { ResourceCard },
+  props: {
+    isAdmin: {
+      type: Boolean,
+      default: false
+    }
+  }
 }
 </script>
 
