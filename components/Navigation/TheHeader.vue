@@ -21,6 +21,9 @@
           router
           exact
         >
+          <v-icon left dark>
+            {{ item.icon }}
+          </v-icon>
           {{ item.title }}
         </v-btn>
       </v-row>
@@ -70,6 +73,11 @@ export default {
           icon: 'mdi-wan',
           title: 'Resources',
           to: '/resources'
+        },
+        {
+          icon: 'mdi-pen',
+          title: 'Admin',
+          to: '/admin'
         }
       ],
       miniVariant: false,

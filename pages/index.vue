@@ -6,8 +6,8 @@
           <v-img
             max-height="399"
             max-width="388"
-            src="icvLogo.png">
-          </v-img>
+            src="icvLogo.png"
+          />
         </v-col>
         <v-card-title class="headline">
           Welcome to Inclusive Colne Valley
