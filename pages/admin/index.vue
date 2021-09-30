@@ -8,12 +8,18 @@
         Create new resource
       </v-btn>
     </section>
+    <section>
+      <h1>Existing posts</h1>
+      <resource-list is-admin />
+    </section>
   </div>
 </template>
 
 <script>
+import ResourceList from '@/components/Resources/ResourceList'
 export default {
-  name: 'Admin'
+  name: 'Admin',
+  components: { ResourceList }
 }
 </script>
 
