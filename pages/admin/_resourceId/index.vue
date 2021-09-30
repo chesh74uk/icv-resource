@@ -8,13 +8,13 @@
 <script>
 import AdminResourceForm from '@/components/Admin/AdminResourceForm'
 export default {
-  name: 'ResourceId',
+  name: 'AdminResourceId',
   components: { AdminResourceForm },
   data () {
     return {
       loadedResource: {
-        title: 'Title',
-        summary: 'Summary',
+        title: 'This is the Title',
+        summary: 'A Summary of things',
         type: 'Audio',
         category: 'Secondary',
         link: 'https://bbc.com/'
