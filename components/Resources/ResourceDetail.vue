@@ -29,7 +29,50 @@
                     class="text-h5"
                     v-text="title"
                   />
+
+                  <v-card-subtitle v-text="summary" />
+
+                  <v-card-actions>
+                    <v-row>
+                      <v-col>
+                        <v-btn
+                          :href="link"
+                          target="_blank"
+                          class="ml-2 mt-5"
+                          outlined
+                          rounded
+                          small
+                        >
+                          View
+                        </v-btn>
+                      </v-col>
+                      <v-col v-if="isAdmin">
+                        <v-btn
+                          :href="resourceLink"
+                          tile
+                          color="success"
+                          class="ml-2 mt-5"
+                          rounded
+                          small
+                        >
+                          <v-icon left>
+                            mdi-pencil
+                          </v-icon>
+                          Edit
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-card-actions>
                 </div>
+
+                <v-avatar
+                  class="ma-3"
+                  size="125"
+                  color="grey"
+                  tile
+                >
+                  <v-img :src="img" />
+                </v-avatar>
               </div>
             </v-card>
           </v-col>

@@ -1,26 +1,17 @@
 <template>
   <div>
     <resource-card
-      id="1"
+      v-for="resource in resources"
+      :id="resource.id"
+      :key="resource.id"
       :is-admin="isAdmin"
-      color="#1F7087"
-      img="https://cdn.vuetifyjs.com/images/cards/foster.jpg"
-      link="https://www.theguardian.com/uk-news/2021/jul/30/the-links-between-welsh-slate-and-slavery?CMP=Share_iOSApp_Other"
-      title="Links between Welsh slate and slavery"
-      summary="Steve Cushion on the Pennant family"
-      category="Secondary"
-      type="Article"
-    />
-    <resource-card
-      id="2"
-      :is-admin="isAdmin"
-      color="#1F7087"
-      img="https://cdn.vuetifyjs.com/images/cards/foster.jpg"
-      link="https://www.bbc.co.uk/sounds/play/p01w66tg"
-      title="Famous Victorians"
-      summary="Three stories focusing on the life of Mary Seacole"
-      category="Key Stage 2"
-      type="Audio"
+      :color="resource.color"
+      :img="resource.img"
+      :link="resource.link"
+      :title="resource.title"
+      :summary="resource.summary"
+      :category="resource.category"
+      :type="resource.type"
     />
   </div>
 </template>
@@ -34,6 +25,10 @@ export default {
     isAdmin: {
       type: Boolean,
       default: false
+    },
+    resources: {
+      type: Array,
+      required: true
     }
   }
 }

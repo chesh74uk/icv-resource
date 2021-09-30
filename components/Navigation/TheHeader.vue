@@ -53,8 +53,8 @@
       >
         <v-list-item-group>
           <v-list-item
-            v-for="(item,i) in userItems"
-            :key="i"
+            v-for="(item,j) in userItems"
+            :key="j"
             :to="item.to"
             router
             exact
@@ -67,8 +67,8 @@
         </v-list-item-group>
         <v-list-item-group>
           <v-list-item
-            v-for="(item,i) in adminItems"
-            :key="i"
+            v-for="(item,j) in adminItems"
+            :key="j"
             :to="item.to"
             router
             exact
