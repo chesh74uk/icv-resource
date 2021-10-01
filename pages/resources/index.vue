@@ -10,7 +10,7 @@ import ResourceList from '@/components/Resources/ResourceList'
 export default {
   name: 'Index',
   components: { ResourceList },
-  asyncData (context) {
+  fetch (context) {
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line nuxt/no-timing-in-fetch-data
       setTimeout(() => {
@@ -41,20 +41,16 @@ export default {
       }, 1000)
     })
       .then((data) => {
-        return data
+        context.store.commit('setResources', data.loadedResources)
       })
       .catch((e) => {
-        context.error(new Error('error'))
+        context.error(e)
       })
-    // eslint-disable-next-line nuxt/no-timing-in-fetch-data
   },
-  // data () {
-  //   return {
-  //     loadedResources: []
-  //   }
-  // },
-  created () {
-    this.$store.dispatch('setResources', this.loadedResources)
+  computed: {
+    loadedResources () {
+      return this.$store.getters.loadedResources
+    }
   }
 }
 
