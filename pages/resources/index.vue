@@ -11,6 +11,7 @@ export default {
   name: 'Index',
   components: { ResourceList },
   asyncData (context, callback) {
+    console.log(context)
     // eslint-disable-next-line nuxt/no-timing-in-fetch-data
     setTimeout(() => {
       callback(null, {
