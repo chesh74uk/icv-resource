@@ -116,7 +116,7 @@ export default {
   methods: {
     onSave () {
       // Save the post
-      console.log(this.editedResource)
+      this.$emit('submit', this.editedResource)
     },
     onCancel () {
       // navigate back
