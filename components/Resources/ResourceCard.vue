@@ -9,7 +9,7 @@
             cols="12"
           >
             <v-card
-              :color="color"
+              color="indigo lighten-1"
               dark
             >
               <div class="d-flex flex-no-wrap justify-space-between">
@@ -50,11 +50,6 @@ export default {
     isAdmin: {
       type: Boolean,
       required: true
-    },
-    color: {
-      type: String,
-      required: false,
-      default: '#1F7087'
     },
     img: {
       type: String,

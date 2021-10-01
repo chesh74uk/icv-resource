@@ -5,7 +5,6 @@
       :id="resource.id"
       :key="resource.id"
       :is-admin="isAdmin"
-      :color="resource.color"
       :img="resource.img"
       :link="resource.link"
       :title="resource.title"
