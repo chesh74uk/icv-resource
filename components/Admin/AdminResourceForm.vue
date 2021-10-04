@@ -1,5 +1,8 @@
 <template>
-  <v-form @submit.prevent="onSave">
+  <v-form
+    id="resource-edit-form"
+    @submit.prevent="onSave"
+  >
     <v-container>
       <v-row>
         <h3>{{ title }}</h3>
@@ -65,9 +68,10 @@
         justify="space-around"
       >
         <v-btn
-          type="submit"
+          @click="onSave"
           color="success"
           class="mr-4"
+          form="resource-edit-form"
         >
           Submit
         </v-btn>

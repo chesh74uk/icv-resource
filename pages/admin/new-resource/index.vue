@@ -18,7 +18,9 @@ export default {
         updatedDate: new Date()
       })
         // eslint-disable-next-line no-console
-        .then(result => console.log(result))
+        .then((result) => {
+          this.$router.push('/admin')
+        })
         // eslint-disable-next-line no-console
         .catch(e => console.log(e))
     }
