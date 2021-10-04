@@ -10,6 +10,14 @@ const createStore = () => {
     mutations: {
       setResources (state, resources) {
         state.loadedResources = resources
+      },
+      addResource (state, resource) {
+        state.loadedResources.push(resource)
+      },
+      editResource (state, editedResource) {
+        const resourceIndex = state.loadedResources.findIndex(
+          resource => resource.id === editedResource.id)
+        state.loadedResources[resourceIndex] = editedResource
       }
     },
     actions: {
@@ -24,6 +32,33 @@ const createStore = () => {
             vuexContext.commit('setResources', resourceArray)
           })
           .catch(e => context.error(e))
+      },
+      addResource (vuexContext, resource) {
+        const createdResource = {
+          ...resource,
+          updatedDate: new Date()
+        }
+        return axios.post('https://inclusive-colne-valley-default-rtdb.europe-west1.firebasedatabase.app/resources.json',
+          createdResource
+        )
+          // eslint-disable-next-line no-console
+          .then((result) => {
+            vuexContext.commit('addResource', { ...createdResource, id: result.data.name })
+            this.$router.push('/admin')
+          })
+          // eslint-disable-next-line no-console
+          .catch(e => console.log(e))
+      },
+      editedResource (vuexContext, editedResource) {
+        return axios.put('https://inclusive-colne-valley-default-rtdb.europe-west1.firebasedatabase.app/resources/' +
+          editedResource.id +
+          '.json', editedResource)
+          // eslint-disable-next-line no-console
+          .then((res) => {
+            vuexContext.commit('editResource', editedResource)
+          })
+          // eslint-disable-next-line no-console
+          .catch(e => console.log(e))
       },
       setResources (vuexContext, resources) {
         vuexContext.commit('setResources', resources)

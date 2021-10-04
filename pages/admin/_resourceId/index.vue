@@ -18,22 +18,17 @@ export default {
     '.json')
       .then((res) => {
         return {
-          loadedResource: res.data
+          loadedResource: { ...res.data, id: context.params.resourceId }
         }
       })
       .catch(e => context.error(e))
   },
   methods: {
     onSubmit (editedResource) {
-      axios.put('https://inclusive-colne-valley-default-rtdb.europe-west1.firebasedatabase.app/resources/' +
-        this.$route.params.resourceId +
-        '.json', editedResource)
-        // eslint-disable-next-line no-console
-        .then((res) => {
+      this.$store.dispatch('editedResource', editedResource)
+        .then(() => {
           this.$router.push('/admin')
         })
-        // eslint-disable-next-line no-console
-        .catch(e => console.log(e))
     }
   }
 }

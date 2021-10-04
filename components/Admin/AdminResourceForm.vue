@@ -68,10 +68,10 @@
         justify="space-around"
       >
         <v-btn
-          @click="onSave"
           color="success"
           class="mr-4"
           form="resource-edit-form"
+          @click="onSave"
         >
           Submit
         </v-btn>
