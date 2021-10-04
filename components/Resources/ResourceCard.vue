@@ -47,9 +47,10 @@ export default {
       type: String,
       required: true
     },
+    // TODO fix admin
     isAdmin: {
       type: Boolean,
-      required: true
+      required: false
     },
     img: {
       type: String,

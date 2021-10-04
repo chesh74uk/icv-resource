@@ -33,6 +33,7 @@
                   />
 
                   <v-card-subtitle v-text="loadedResource.summary" />
+                  <v-card-text>Updated: {{ loadedResource.updatedDate | date }}</v-card-text>
                   <v-divider />
                   <v-card-actions>
                     <v-row>
