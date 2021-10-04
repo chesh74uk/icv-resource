@@ -38,9 +38,8 @@ const createStore = () => {
           ...resource,
           updatedDate: new Date()
         }
-        return axios.post('https://inclusive-colne-valley-default-rtdb.europe-west1.firebasedatabase.app/resources.json',
-          createdResource
-        )
+        const postUrl = 'https://inclusive-colne-valley-default-rtdb.europe-west1.firebasedatabase.app/resources.json'
+        return axios.post(postUrl, createdResource)
           // eslint-disable-next-line no-console
           .then((result) => {
             vuexContext.commit('addResource', { ...createdResource, id: result.data.name })
@@ -50,9 +49,8 @@ const createStore = () => {
           .catch(e => console.log(e))
       },
       editedResource (vuexContext, editedResource) {
-        return axios.put('https://inclusive-colne-valley-default-rtdb.europe-west1.firebasedatabase.app/resources/' +
-          editedResource.id +
-          '.json', editedResource)
+        const putUrl = 'https://inclusive-colne-valley-default-rtdb.europe-west1.firebasedatabase.app/resources/'
+        return axios.put(putUrl + editedResource.id + '.json', editedResource)
           // eslint-disable-next-line no-console
           .then((res) => {
             vuexContext.commit('editResource', editedResource)
