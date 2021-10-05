@@ -1,20 +1,17 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
+    <v-col>
       <v-card>
-        <v-col align="center">
-          <v-img
-            max-height="399"
-            max-width="388"
-            src="icvLogo.png"
-          />
+        <v-col>
           <v-card-title class="headline text-center">
             Welcome to Inclusive Colne Valley
           </v-card-title>
           <v-card-text>
             <p>
               Inclusive Colne Valley aims to provide a variety of resources for
-              various educational uses
+              various educational uses. Including Key Stage 1 & 2, Secondary, Teachers, Parents.
+            </p><p>
+              Various types, audio video, text
             </p>
           </v-card-text>
         </v-col>
@@ -22,3 +19,13 @@
     </v-col>
   </v-row>
 </template>
+
+<script>
+export default {
+  name: 'Index'
+}
+</script>
+
+<style scoped>
+
+</style>
