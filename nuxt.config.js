@@ -48,6 +48,10 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
+  env: {
+    fbAPIKey: 'AIzaSyBCUsf3WVQRV-nM1hlPm3veOni_EhWoC_8'
+  },
+
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
