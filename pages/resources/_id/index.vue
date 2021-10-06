@@ -33,7 +33,7 @@
                   />
 
                   <v-card-subtitle v-text="loadedResource.summary" />
-                  <v-card-text>Updated: {{ loadedResource.updatedDate | date }}</v-card-text>
+                  <v-card-text>Created: {{ loadedResource.updatedDate | date }}</v-card-text>
                   <v-divider />
                   <v-card-actions>
                     <v-row>
@@ -48,7 +48,7 @@
                           View
                         </v-btn>
                       </v-col>
-                      <v-col v-if="isAdmin">
+                      <v-col>
                         <v-btn
                           :href="loadedResource.resourceLink"
                           tile

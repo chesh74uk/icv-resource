@@ -93,6 +93,7 @@ export default {
       userItems: [
         { icon: 'mdi-tree', title: 'Welcome', to: '/' },
         { icon: 'mdi-information', title: 'About', to: '/about' },
+        { icon: 'mdi-wan', title: 'Login', to: '/admin/auth' },
         { icon: 'mdi-wan', title: 'Resources', to: '/resources' }
       ],
       adminItems: [
