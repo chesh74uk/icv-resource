@@ -12,7 +12,7 @@ import AdminResourceForm from '@/components/Admin/AdminResourceForm'
 export default {
   name: 'AdminResourceId',
   components: { AdminResourceForm },
-  middleware: 'auth',
+  middleware: ['check-auth', 'auth'],
   asyncData (context) {
     return axios.get('https://inclusive-colne-valley-default-rtdb.europe-west1.firebasedatabase.app/resources/' +
       context.params.resourceId +

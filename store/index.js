@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import axios from 'axios'
+import Cookie from 'js-cookie'
 
 const createStore = () => {
   // eslint-disable-next-line import/no-named-as-default-member
@@ -22,6 +23,9 @@ const createStore = () => {
       },
       setToken (state, token) {
         state.token = token
+      },
+      clearToken (state) {
+        state.token = null
       }
     },
     actions: {
@@ -77,8 +81,51 @@ const createStore = () => {
         }
         ).then((result) => {
           vuexContext.commit('setToken', result.idToken)
+          localStorage.setItem('token', result.idToken)
+          localStorage.setItem('tokenExpiration', new Date().getTime() + result.idToken * 1000)
+          vuexContext.dispatch('setLogoutTimer', result.expiresIn * 1000)
+          // eslint-disable-next-line no-undef
+          Cookie.set('jwt', result.idToken)
+          Cookie.set('expirationDate', new Date().getTime() + result.idToken * 1000)
           // eslint-disable-next-line no-console
         }).catch(e => console.log(e))
+      },
+      setLogoutTimer (vuexContext, duration) {
+        setTimeout(() => {
+          vuexContext.commit('clearToken')
+        }, duration)
+      },
+      initAuth (vuexContext, req) {
+        if (req) {
+          if (!req.headers.cookie) {
+            return null
+          }
+          const jwtCookie = req.headers.cookie
+            .split(';')
+            .find(c => c.trim().startsWith('jwt='))
+          if (!jwtCookie) {
+            return null
+          }
+          // eslint-disable-next-line no-unused-vars
+          const token = jwtCookie.split('=')[1]
+          // eslint-disable-next-line no-unused-vars
+          const expirationDate = req.headers.cookie
+            .split(';')
+            .find(c => c.trim().startsWith('expirationDate='))
+            .split('=')[1]
+        } else {
+          const token = localStorage.getItem('token')
+          const expirationDate = localStorage.getItem('tokenExpiration')
+
+          if (new Date().getTime() > +expirationDate || !token) {
+            return null
+          }
+        }
+
+        // eslint-disable-next-line no-undef
+        vuexContext.dispatch('setLogoutTimer', +expirationDate - new Date().getTime())
+        // eslint-disable-next-line no-undef
+        vuexContext.commit('setToken', token)
       }
     },
     getters: {

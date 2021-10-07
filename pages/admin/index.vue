@@ -20,7 +20,7 @@ import ResourceList from '@/components/Resources/ResourceList'
 export default {
   name: 'Admin',
   components: { ResourceList },
-  middleware: 'auth',
+  middleware: ['check-auth', 'auth'],
   computed: {
     loadedResources () {
       return this.$store.getters.loadedResources

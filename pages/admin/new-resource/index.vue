@@ -10,7 +10,7 @@ import AdminResourceForm from '@/components/Admin/AdminResourceForm'
 export default {
   name: 'NewResource',
   components: { AdminResourceForm },
-  middleware: 'auth',
+  middleware: ['check-auth', 'auth'],
   methods: {
     onSubmitted (resourceData) {
       this.$store.dispatch('addResource', resourceData)
