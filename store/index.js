@@ -84,6 +84,9 @@ const createStore = () => {
     getters: {
       loadedResources (state) {
         return state.loadedResources
+      },
+      isAuthenticated (state) {
+        return state.token != null
       }
     }
   })

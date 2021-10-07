@@ -10,7 +10,7 @@
     </section>
     <section>
       <h1>Existing posts</h1>
-      <resource-list :resources="loadedResources" is-admin />
+      <resource-list :resources="loadedResources" />
     </section>
   </div>
 </template>
@@ -20,6 +20,7 @@ import ResourceList from '@/components/Resources/ResourceList'
 export default {
   name: 'Admin',
   components: { ResourceList },
+  middleware: 'auth',
   computed: {
     loadedResources () {
       return this.$store.getters.loadedResources

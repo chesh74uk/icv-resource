@@ -15,7 +15,7 @@
       >
         <v-btn
           v-for="(item,i) in userItems"
-          :key="i"
+          :key="'A' + i"
           elevation="2"
           :to="item.to"
           router
@@ -28,7 +28,7 @@
         </v-btn>
         <v-btn
           v-for="(item,i) in adminItems"
-          :key="i"
+          :key="'B' + i"
           elevation="2"
           :to="item.to"
           router
@@ -54,7 +54,7 @@
         <v-list-item-group>
           <v-list-item
             v-for="(item,j) in userItems"
-            :key="j"
+            :key="'A'+ j"
             :to="item.to"
             router
             exact
@@ -68,7 +68,7 @@
         <v-list-item-group>
           <v-list-item
             v-for="(item,j) in adminItems"
-            :key="j"
+            :key="'B' + j"
             :to="item.to"
             router
             exact
