@@ -1,28 +1,35 @@
 <template>
   <div>
     <section>
-      <v-row>
-        <v-col>
+      <v-row justify="center">
+        <v-col lg="2">
           <v-btn
-            elevation="2"
+            class="ma-2"
+            outlined
+            color="indigo"
             to="/admin/new-resource"
           >
             Create new resource
           </v-btn>
         </v-col>
-        <v-col>
+        <v-col lg="2">
           <v-btn
-            elevation="2"
+            class="ma-2"
+            outlined
+            color="indigo"
             @click="onLogout"
           >
             Logout
           </v-btn>
         </v-col>
       </v-row>
+      <p />
       <v-divider />
+      <p />
     </section>
     <section>
-      <h1>Existing posts</h1>
+      <h1>Edit Existing posts</h1>
+      <p />
       <resource-list :resources="loadedResources" is-admin />
     </section>
   </div>
@@ -33,6 +40,7 @@ import ResourceList from '@/components/Resources/ResourceList'
 export default {
   name: 'Admin',
   components: { ResourceList },
+  layout: 'admin',
   middleware: ['check-auth', 'auth'],
   computed: {
     loadedResources () {

@@ -91,11 +91,11 @@ const createStore = () => {
               'tokenExpiration',
               new Date().getTime() + Number.parseInt(result.expiresIn) * 1000
             )
-            Cookie.set('jwt', result.idToken, { sameSite: 'strict' })
+            Cookie.set('jwt', result.idToken, { sameSite: 'None', secure: true })
             Cookie.set(
               'expirationDate',
               new Date().getTime() + Number.parseInt(result.expiresIn) * 1000,
-              { sameSite: 'strict' }
+              { sameSite: 'None', secure: true }
             )
           })
           // eslint-disable-next-line no-console

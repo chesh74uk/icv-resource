@@ -10,35 +10,54 @@
         @click="drawer = true"
       />
       <v-row
+        v-if="!isAdmin"
         class="hidden-sm-and-down"
-        justify="space-around"
+        justify="center"
       >
-        <v-btn
+        <v-col cols="2" />
+        <v-col
           v-for="(item,i) in userItems"
           :key="'A' + i"
-          elevation="2"
-          :to="item.to"
-          router
-          exact
         >
-          <v-icon left dark>
-            {{ item.icon }}
-          </v-icon>
-          {{ item.title }}
-        </v-btn>
-        <v-btn
+          <v-btn
+            class="ma-2"
+            outlined
+            color="indigo"
+            :to="item.to"
+            router
+            exact
+          >
+            <v-icon left dark>
+              {{ item.icon }}
+            </v-icon>
+            {{ item.title }}
+          </v-btn>
+        </v-col>
+      </v-row>
+      <v-row
+        v-if="isAdmin"
+        class="hidden-sm-and-down"
+        justify="center"
+      >
+        <v-col cols="2" />
+        <v-col
           v-for="(item,i) in adminItems"
           :key="'B' + i"
-          elevation="2"
-          :to="item.to"
-          router
-          exact
         >
-          <v-icon left dark>
-            {{ item.icon }}
-          </v-icon>
-          {{ item.title }}
-        </v-btn>
+          <v-btn
+            class="ma-2"
+            outlined
+            color="indigo"
+            :to="item.to"
+            router
+            exact
+          >
+            <v-icon left dark>
+              {{ item.icon }}
+            </v-icon>
+            {{ item.title }}
+          </v-btn>
+        </v-col>
       </v-row>
     </v-app-bar>
 
@@ -48,6 +67,7 @@
       temporary
     >
       <v-list
+        v-if="!isAdmin"
         nav
         dense
       >
@@ -65,6 +85,8 @@
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
+      </v-list>
+      <v-list v-if="isAdmin">
         <v-list-item-group>
           <v-list-item
             v-for="(item,j) in adminItems"
@@ -93,16 +115,21 @@ export default {
       userItems: [
         { icon: 'mdi-tree', title: 'Welcome', to: '/' },
         { icon: 'mdi-information', title: 'About', to: '/about' },
-        { icon: 'mdi-wan', title: 'Login', to: '/admin/auth' },
         { icon: 'mdi-wan', title: 'Resources', to: '/resources' }
       ],
       adminItems: [
+        { icon: 'mdi-wan', title: 'Login', to: '/admin/auth' },
         { icon: 'mdi-pen', title: 'Admin', to: '/admin' }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
       title: 'Inclusive Colne Valley'
+    }
+  },
+  computed: {
+    isAdmin () {
+      return this.$store.getters.isAuthenticated
     }
   }
 }
