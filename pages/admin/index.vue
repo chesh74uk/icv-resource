@@ -23,7 +23,7 @@
     </section>
     <section>
       <h1>Existing posts</h1>
-      <resource-list :resources="loadedResources" />
+      <resource-list :resources="loadedResources" is-admin />
     </section>
   </div>
 </template>
@@ -37,6 +37,9 @@ export default {
   computed: {
     loadedResources () {
       return this.$store.getters.loadedResources
+    },
+    isAdmin () {
+      return this.$store.getters.isAuthenticated
     }
   },
   methods: {
