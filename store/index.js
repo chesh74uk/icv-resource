@@ -70,61 +70,64 @@ const createStore = () => {
         vuexContext.commit('setResources', resources)
       },
       authenticateUser (vuexContext, authData) {
-        let authUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + process.env.fbAPIKey
+        let authUrl =
+          'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
+          process.env.fbAPIKey
         if (!authData.isLogin) {
-          authUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + process.env.fbAPIKey
+          authUrl =
+            "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='" +
+            process.env.fbAPIKey
         }
-        return this.$axios.$post(authUrl, {
-          email: authData.email,
-          password: authData.password,
-          returnSecureToken: true
-        }
-        ).then((result) => {
-          vuexContext.commit('setToken', result.idToken)
-          localStorage.setItem('token', result.idToken)
-          localStorage.setItem('tokenExpiration', new Date().getTime() + result.idToken * 1000)
-          vuexContext.dispatch('setLogoutTimer', result.expiresIn * 1000)
-          // eslint-disable-next-line no-undef
-          Cookie.set('jwt', result.idToken)
-          Cookie.set('expirationDate', new Date().getTime() + result.idToken * 1000)
+        return this.$axios
+          .$post(authUrl, {
+            email: authData.email,
+            password: authData.password,
+            returnSecureToken: true
+          })
+          .then((result) => {
+            vuexContext.commit('setToken', result.idToken)
+            localStorage.setItem('token', result.idToken)
+            localStorage.setItem(
+              'tokenExpiration',
+              new Date().getTime() + Number.parseInt(result.expiresIn) * 1000
+            )
+            Cookie.set('jwt', result.idToken)
+            Cookie.set(
+              'expirationDate',
+              new Date().getTime() + Number.parseInt(result.expiresIn) * 1000
+            )
+          })
           // eslint-disable-next-line no-console
-        }).catch(e => console.log(e))
-      },
-      setLogoutTimer (vuexContext, duration) {
-        setTimeout(() => {
-          vuexContext.commit('clearToken')
-        }, duration)
+          .catch(e => console.log(e))
       },
       initAuth (vuexContext, req) {
+        let token
+        let expirationDate
         if (req) {
           if (!req.headers.cookie) {
-            return null
+            return
           }
           const jwtCookie = req.headers.cookie
             .split(';')
             .find(c => c.trim().startsWith('jwt='))
           if (!jwtCookie) {
-            return null
+            return
           }
-          // eslint-disable-next-line no-unused-vars
-          const token = jwtCookie.split('=')[1]
-          // eslint-disable-next-line no-unused-vars
-          const expirationDate = req.headers.cookie
+          token = jwtCookie.split('=')[1]
+          expirationDate = req.headers.cookie
             .split(';')
             .find(c => c.trim().startsWith('expirationDate='))
             .split('=')[1]
         } else {
-          const token = localStorage.getItem('token')
-          const expirationDate = localStorage.getItem('tokenExpiration')
-
-          if (new Date().getTime() > +expirationDate || !token) {
-            return null
-          }
+          token = localStorage.getItem('token')
+          expirationDate = localStorage.getItem('tokenExpiration')
         }
-
-        // eslint-disable-next-line no-undef
-        vuexContext.dispatch('setLogoutTimer', +expirationDate - new Date().getTime())
-        // eslint-disable-next-line no-undef
+        if (new Date().getTime() > +expirationDate || !token) {
+          // eslint-disable-next-line no-console
+          console.log('No token or invalid token')
+          vuexContext.commit('clearToken')
+          return
+        }
         vuexContext.commit('setToken', token)
       }
     },
