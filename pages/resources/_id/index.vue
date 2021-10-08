@@ -48,21 +48,6 @@
                           View
                         </v-btn>
                       </v-col>
-                      <v-col>
-                        <v-btn
-                          :href="loadedResource.resourceLink"
-                          tile
-                          color="success"
-                          class="ml-2 mt-5"
-                          rounded
-                          small
-                        >
-                          <v-icon left>
-                            mdi-pencil
-                          </v-icon>
-                          Edit
-                        </v-btn>
-                      </v-col>
                     </v-row>
                   </v-card-actions>
                 </div>

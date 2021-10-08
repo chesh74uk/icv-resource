@@ -1,12 +1,25 @@
 <template>
   <div>
     <section>
-      <v-btn
-        elevation="2"
-        to="/admin/new-resource"
-      >
-        Create new resource
-      </v-btn>
+      <v-row>
+        <v-col>
+          <v-btn
+            elevation="2"
+            to="/admin/new-resource"
+          >
+            Create new resource
+          </v-btn>
+        </v-col>
+        <v-col>
+          <v-btn
+            elevation="2"
+            @click="onLogout"
+          >
+            Logout
+          </v-btn>
+        </v-col>
+      </v-row>
+      <v-divider />
     </section>
     <section>
       <h1>Existing posts</h1>
@@ -24,6 +37,12 @@ export default {
   computed: {
     loadedResources () {
       return this.$store.getters.loadedResources
+    }
+  },
+  methods: {
+    onLogout () {
+      this.$store.dispatch('logout')
+      this.$router.push('/')
     }
   }
 }
