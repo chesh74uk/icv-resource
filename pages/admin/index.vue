@@ -30,7 +30,29 @@
     <section>
       <h1>Edit Existing posts</h1>
       <p />
-      <resource-list :resources="loadedResources" is-admin />
+      <v-form>
+        <v-row>
+          <v-col cols="6">
+            <v-select
+              v-model="stage"
+              :items="stages"
+              label="Select stage"
+              filled
+              @click="reset = false"
+            />
+          </v-col>
+          <v-col>
+            <v-btn
+              large
+              outlined
+              @click="reset = true"
+            >
+              Reset
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-form>
+      <resource-list :resources="reset ? loadedResources : filterResources" is-admin />
     </section>
   </div>
 </template>
@@ -42,18 +64,34 @@ export default {
   components: { ResourceList },
   layout: 'admin',
   middleware: ['check-auth', 'auth'],
+  data () {
+    return {
+      stage: '',
+      stages: ['Key Stage 1', 'Key Stage 2', 'Secondary', 'Parents', 'Teachers'],
+      reset: false
+    }
+  },
   computed: {
     loadedResources () {
-      return this.$store.getters.loadedResources
+      return this.allResources()
     },
     isAdmin () {
       return this.$store.getters.isAuthenticated
+    },
+    filterResources () {
+      return this.filterResourcesByStage()
     }
   },
   methods: {
     onLogout () {
       this.$store.dispatch('logout')
       this.$router.push('/')
+    },
+    filterResourcesByStage () {
+      return this.$store.getters.loadedResources.filter(loadedResources => !loadedResources.category.indexOf(this.stage))
+    },
+    allResources () {
+      return this.$store.getters.loadedResources
     }
   }
 }
