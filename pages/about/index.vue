@@ -1,28 +1,55 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col>
-      <v-card>
-        <v-col>
-          <v-card-title class="headline text-center">
+  <v-container fluid>
+    <v-row justify="center" align="center" dense>
+      <v-col cols="12">
+        <v-card>
+          <v-card-title class="text-h5">
             Welcome to Inclusive Colne Valley
           </v-card-title>
+          <v-card-subtitle>
+            A new local group of people working to make our valley a welcoming place for all.
+          </v-card-subtitle>
+        </v-card>
+      </v-col>
+      <v-col
+        v-for="(item, i) in items"
+        :key="i"
+        cols="12"
+      >
+        <v-card>
+          <v-card-title>
+            {{ item.title }}
+          </v-card-title>
           <v-card-text>
-            <p>
-              Inclusive Colne Valley aims to provide a variety of resources for
-              various educational uses. Including Key Stage 1 & 2, Secondary, Teachers, Parents.
-            </p><p>
-              Various types, audio video, text
-            </p>
+            {{ item.text }}
           </v-card-text>
-        </v-col>
-      </v-card>
-    </v-col>
-  </v-row>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 export default {
-  name: 'Index'
+  name: 'Index',
+  data () {
+    return {
+      items: [
+        {
+          title: 'Diversity',
+          text: 'The representation of different people including different ethnicities, religions, sexualities,genders and abilities'
+        },
+        {
+          title: 'Inclusion',
+          text: 'Ensuring that everyone has an equal opportunity to contribute and to influence'
+        },
+        {
+          title: 'Belonging',
+          text: 'Ensuring that everyone feels safe and at home'
+        }
+      ]
+    }
+  }
 }
 </script>
 

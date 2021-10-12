@@ -15,8 +15,8 @@
             </v-card-title>
             <v-card-text>
               <p>
-                Inclusive Colne Valley aims to provide a variety of resources for
-                various educational uses
+                A new local group of people working to make our valley
+                a welcoming place for all by promoting diversity, inclusion and belonging
               </p>
             </v-card-text>
           </v-col>
