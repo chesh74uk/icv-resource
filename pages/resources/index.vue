@@ -1,20 +1,28 @@
 <template>
   <div>
     <v-form>
-      <!--      <v-select-->
-      <!--        v-model="type"-->
-      <!--        :items="types"-->
-      <!--        label="Select type"-->
-      <!--        filled-->
-      <!--      />-->
-      <v-select
-        v-model="stage"
-        :items="stages"
-        label="Select stage"
-        filled
-      />
+      <v-row>
+        <v-col cols="6">
+          <v-select
+            v-model="stage"
+            :items="stages"
+            label="Select stage"
+            filled
+            @click="reset = false"
+          />
+        </v-col>
+        <v-col>
+          <v-btn
+            large
+            outlined
+            @click="reset = true"
+          >
+            Reset
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-form>
-    <resource-list :resources="filterResources" />
+    <resource-list :resources="reset ? loadedResources : filterResources" />
   </div>
 </template>
 
@@ -29,12 +37,13 @@ export default {
       type: '',
       stage: '',
       types: ['Audio', 'Video', 'Text'],
-      stages: ['Key Stage 1', 'Key Stage 2', 'Secondary', 'Parents', 'Teachers']
+      stages: ['Key Stage 1', 'Key Stage 2', 'Secondary', 'Parents', 'Teachers'],
+      reset: false
     }
   },
   computed: {
     loadedResources () {
-      return this.$store.getters.loadedResources
+      return this.allResources()
     },
     filterResources () {
       return this.filterResourcesByStage()
@@ -46,6 +55,9 @@ export default {
     // },
     filterResourcesByStage () {
       return this.$store.getters.loadedResources.filter(loadedResources => !loadedResources.category.indexOf(this.stage))
+    },
+    allResources () {
+      return this.$store.getters.loadedResources
     }
   }
 }
