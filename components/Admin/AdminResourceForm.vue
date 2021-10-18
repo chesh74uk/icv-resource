@@ -55,10 +55,10 @@
     <v-spacer />
     <v-container>
       <resource-card-preview
-        :img="preview.image"
-        :link="preview.url"
-        :title="finalTitle ? editedResource.title : preview.title"
-        :summary="preview.description"
+        :img="editedResource.img"
+        :link="editedResource.link"
+        :title="editedResource.title"
+        :summary="editedResource.summary"
         :type="editedResource.type"
         :category="editedResource.category"
       />
@@ -129,12 +129,6 @@ export default {
       required: false
     }
   },
-  computed: {
-    finalTitle () {
-      // TODO Fix if title is not blank add title
-      return this.editedResource.title > 0
-    }
-  },
   data () {
     return {
       preview: {
@@ -152,7 +146,8 @@ export default {
             summary: '',
             type: '',
             category: '',
-            link: ''
+            link: '',
+            img: ''
           }
     }
   },
@@ -168,8 +163,12 @@ export default {
     async onPreview () {
       const preview = await this.$axios.$get('http://api.linkpreview.net/?key=91b947d8ad96d94eb94a67b2fdf887e5&q=' +
       this.editedResource.link)
-      this.preview = preview
-      console.log(preview.img)
+      this.editedResource.title = preview.title
+      this.editedResource.summary = preview.description
+      this.editedResource.img = preview.image
+      // eslint-disable-next-line no-console
+      // console.log('Title: ' + this.editedResource.title + ' ' + this.editedResource.title.length)
+      // console.log('Preview Title: ' + this.preview.title)
     }
   }
 }
