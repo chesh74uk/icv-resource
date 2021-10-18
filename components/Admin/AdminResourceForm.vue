@@ -98,13 +98,57 @@
       >
         Submit
       </v-btn>
-
       <v-btn
         color="warning"
         @click="onCancel"
       >
         Cancel
       </v-btn>
+      <div class="text-center">
+        <v-dialog
+          v-model="dialog"
+          width="500"
+        >
+          <template #activator="{ on, attrs }">
+            <v-btn
+              color="red lighten-2"
+              dark
+              v-bind="attrs"
+              v-on="on"
+            >
+              Delete
+            </v-btn>
+          </template>
+
+          <v-card>
+            <v-card-title> Warning</v-card-title>
+            <v-card-text>
+              Are you sure you want to delete?
+            </v-card-text>
+
+            <v-divider />
+
+            <v-card-actions>
+              <v-spacer />
+              <v-btn
+                color="info"
+                text
+                @click="dialog = false"
+              >
+                Close
+              </v-btn>
+              <v-btn
+                color="error"
+                text
+                @click="onDelete"
+              >
+                Delete
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
+      </div>
     </v-row>
   </v-container>
 </template>
@@ -130,6 +174,7 @@ export default {
   },
   data () {
     return {
+      dialog: false,
       preview: {
         description: '',
         image: '',
@@ -158,6 +203,10 @@ export default {
     onCancel () {
       // navigate back
       this.$router.push('/admin')
+    },
+    onDelete () {
+      // TODO add delete functionality https://firebase.google.com/docs/reference/rest/database#section-delete
+      this.dialog = false
     },
     async onPreview () {
       const preview = await this.$axios.$get('http://api.linkpreview.net/?key=91b947d8ad96d94eb94a67b2fdf887e5&q=' +
