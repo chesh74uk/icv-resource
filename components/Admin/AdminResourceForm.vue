@@ -6,6 +6,31 @@
     >
       <v-container>
         <v-row>
+          <h3>{{ title }}</h3>
+        </v-row>
+        <v-row>
+          <v-col
+            cols="12"
+            sm="6"
+          >
+            <v-text-field
+              v-model="editedResource.title"
+              label="Title"
+              filled
+            />
+          </v-col>
+          <v-col
+            cols="12"
+            sm="6"
+          >
+            <v-text-field
+              v-model="editedResource.summary"
+              label="Summary"
+              filled
+            />
+          </v-col>
+        </v-row>
+        <v-row>
           <v-col
             cols="12"
             sm="6"
@@ -31,7 +56,7 @@
         </v-row>
         <v-row>
           <v-col
-            cols="12"
+            cols="8"
           >
             <v-text-field
               v-model="editedResource.link"
@@ -39,16 +64,14 @@
               filled
             />
           </v-col>
-        </v-row>
-        <v-row
-          justify="space-around"
-        >
-          <v-btn
-            color="primary"
-            @click="onPreview"
-          >
-            Preview
-          </v-btn>
+          <v-col cols="4">
+            <v-btn
+              color="primary"
+              @click="onPreview"
+            >
+              Preview
+            </v-btn>
+          </v-col>
         </v-row>
       </v-container>
     </v-form>
@@ -63,31 +86,7 @@
         :category="editedResource.category"
       />
     </v-container>
-    <v-row>
-      <h3>{{ title }}</h3>
-    </v-row>
-    <v-row>
-      <v-col
-        cols="12"
-        sm="6"
-      >
-        <v-text-field
-          v-model="editedResource.title"
-          label="Title"
-          filled
-        />
-      </v-col>
-      <v-col
-        cols="12"
-        sm="6"
-      >
-        <v-text-field
-          v-model="editedResource.summary"
-          label="Summary"
-          filled
-        />
-      </v-col>
-    </v-row>
+
     <v-row
       justify="space-around"
     >
