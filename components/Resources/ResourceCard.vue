@@ -1,40 +1,38 @@
 <template>
   <nuxt-link :to="resourceLink">
     <v-card
-      class="mx-auto"
+      class="mx-auto my-12"
+      max-width="374"
+      color="indigo lighten-1"
+      dark
     >
-      <v-container>
-        <v-row dense>
-          <v-col
-            cols="12"
-          >
-            <v-card
-              color="indigo lighten-1"
-              dark
+      <v-img
+        :src="img"
+        height="125"
+      />
+      <v-card-title
+        class="text-h5"
+        v-text="title"
+      />
+      <v-card-text>{{ summary }}</v-card-text>
+      <v-divider class="mx-4" />
+      <v-card-text>
+        <v-chip-group column>
+          <v-row justify="center" class="mx-0">
+            <v-chip
+              class="ma-2"
+              color="primary"
             >
-              <div class="d-flex flex-no-wrap justify-space-between">
-                <div>
-                  <v-chip
-                    class="ma-2"
-                    color="primary"
-                  >
-                    {{ category }}
-                  </v-chip>
-                  <v-chip
-                    class="ma-2"
-                  >
-                    {{ type }}
-                  </v-chip>
-                  <v-card-title
-                    class="text-h5"
-                    v-text="title"
-                  />
-                </div>
-              </div>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
+              {{ category }}
+            </v-chip>
+            <v-chip
+              class="ma-2"
+            >
+              {{ type }}
+            </v-chip>
+          </v-row>
+        </v-chip-group>
+      </v-card-text>
     </v-card>
   </nuxt-link>
 </template>
@@ -45,9 +43,9 @@ export default {
   props: {
     id: {
       type: String,
-      required: true
+      required: false,
+      default: ''
     },
-    // TODO fix admin
     isAdmin: {
       type: Boolean,
       required: false
