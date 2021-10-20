@@ -148,8 +148,8 @@ const createStore = () => {
       },
       logout (vuexContext) {
         vuexContext.commit('clearToken')
-        Cookie.remove('jwt')
-        Cookie.remove('expirationDate')
+        Cookie.remove('jwt', { sameSite: 'None', secure: true })
+        Cookie.remove('expirationDate', { sameSite: 'None', secure: true })
         if (process.client) {
           localStorage.removeItem('token')
           localStorage.removeItem('tokenExpiration')
