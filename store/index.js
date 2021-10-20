@@ -21,6 +21,10 @@ const createStore = () => {
           resource => resource.id === editedResource.id)
         state.loadedResources[resourceIndex] = editedResource
       },
+      deleteResource (state, resource) {
+        state.loadedResources.splice(state.loadedResources.indexOf(resource), 1)
+        // state.loadedResources = deletedResource
+      },
       setToken (state, token) {
         state.token = token
       },
@@ -65,6 +69,17 @@ const createStore = () => {
           })
           // eslint-disable-next-line no-console
           .catch(e => console.log(e))
+      },
+      deleteResource (vuexContext, deleteResource) {
+        const delUrl = 'https://inclusive-colne-valley-default-rtdb.europe-west1.firebasedatabase.app/resources/'
+        return axios.post(delUrl + deleteResource.id + '.json?auth=' + vuexContext.state.token + '&x-http-method-override=DELETE')
+          .then((res) => {
+            vuexContext.commit('deleteResource', deleteResource)
+            this.$router.push('/admin')
+          })
+          // eslint-disable-next-line no-console
+          .catch(e => console.log(e))
+        // 'https://[PROJECT_ID].firebaseio.com/users/jack/name/last.json?x-http-method-override=DELETE'
       },
       setResources (vuexContext, resources) {
         vuexContext.commit('setResources', resources)

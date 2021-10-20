@@ -147,7 +147,6 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-
       </div>
     </v-row>
   </v-container>
@@ -206,6 +205,10 @@ export default {
     },
     onDelete () {
       // TODO add delete functionality https://firebase.google.com/docs/reference/rest/database#section-delete
+      this.$store.dispatch('deleteResource', this.editedResource)
+        .then(() => {
+          this.$router.push('/admin')
+        })
       this.dialog = false
     },
     async onPreview () {
